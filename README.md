@@ -12,5 +12,33 @@ The pitch is a web app where a user can add a one minute pitch and other users c
 
 ### Cloning
 * In your terminal<br>
-   $ git clone 
+   $ git clone https://github.com/Anabella1109/THE-PITCH.git
+   $ cd THE-PITCH
+
+### Install postgres
+[Postgres]()
+  
+### Create virtual environment
+sudo apt-get install python3.6-venv<br>
+python3.6 -m venv virtual<br>
+source virtual/bin/activate<br>
+
+### Install dependencies
+pip3 install -r requirements<br>
+
+### Exporting environment variables
+export DATABASE_URL='postgresql+psycopg2://username:password@localhost/thepitch'<br>
+export SECRET_KEY='Your secret key'
+
+## Run database migrations
+python manage.py db init<br>
+python manage.py db migrate -m "initial migration"<br>
+python manage.py db upgrade
+
+### Running
+ * In your terminal<br>
+
+     $ chmod +x start.sh<br>
+     $ ./start.sh
+
 
