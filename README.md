@@ -5,7 +5,7 @@
 ## Description
 The pitch is a web app where a user can add a one minute pitch and other users can comment on it and upvote or downvote it.These pitches are divided in different categories such as pickup lines ,interview pitches and so on.A user has to create an account and they have to be logged in to post,vote on or comment on a pitch
 
-<!-- ## BDD
+## BDD
 | Behavior            | Input                         | Output                        | 
 | ------------------- | ----------------------------- | ----------------------------- |
 | Signing up | Fill in the form in the signup page | Redirects to the login page |
@@ -16,7 +16,7 @@ The pitch is a web app where a user can add a one minute pitch and other users c
 | Leaving feedback on the pitch | Type the feedback on the text area field in the pitch page, and hit post comment | Reloads the page and posts the feedback. The comments will be shown from the most recent |
 | Viewing user profile | Click on the users name | Redirects the user to the clicked user profile |
 | Uploading a photo | Click on the choose file button and choose file | The page will be refreshed with the profile photo updated |
-| Editing the bio | Click on the ```edit bio``` button and enter your bio  | Redirects the page back to the profile page with an updated bio | -->
+| Editing the bio | Click on the ```edit bio``` button and enter your bio  | Redirects the page back to the profile page with an updated bio |
 
 ##Setup/Installations
 ### Prerequisites
