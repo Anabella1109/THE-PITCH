@@ -43,7 +43,7 @@ class Pitch(db.Model):
    user_id= db.Column(db.Integer,db.ForeignKey('users.id'))
    content = db.Column(db.String(255))
    comments = db.Relationship('Comment',backref='comment' ,lazy='dynamic')
-
+   category = db.Column(db.String(255))
 
 
    def save_pitch(self):
