@@ -15,7 +15,7 @@ class User(UserMixin,db.model):
     profile_pic_path = db.Column(db.String(255))
     pass_secure=db.column(db.String(255))
     pitches= db.Relationship('Pitch',backref='pitch', lazy='dynamic')
-
+    comments = db.Relationship('Comment',backref='comment' ,lazy='dynamic')
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
@@ -42,6 +42,8 @@ class Pitch(db.Model):
    id = db.Column(db.integer,primary_key = True)
    user_id= db.Column(db.Integer,db.ForeignKey('users.id'))
    content = db.Column(db.String(255))
+   comments = db.Relationship('Comment',backref='comment' ,lazy='dynamic')
+
 
 
    def save_pitch(self):
@@ -57,9 +59,30 @@ class Pitch(db.Model):
         pitches = Pitch.query.filter_by(user_id=id).all()
         return pitches
 
+class Comment(db.model):
+    __tablename__= 'comments'
+    
+    id= db.Column(db.Integer,primary_key= True)
+    content = db.Column(db.String(255))
+    user_id= db.Column(db.Integer,db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
 
 
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
 
+    @classmethod
+    def clear_comments(cls):
+        Comment.all_comments.clear()
 
+    @classmethod
+    def get_comments(cls,id):
+        comments = Comment.query.filter_by(pitch_id=id).all()
+        return comments
 
+    @classmethod
+    def get_commentss(cls,id):
+        comments = Comment.query.filter_by(user_id=id).all()
+        return comments
 
