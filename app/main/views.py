@@ -15,7 +15,7 @@ def index():
 @main.route('/home', methods = ['GET', 'POST'])
 @login_required
 def home():
-    form = AddPitchForm
+    form = AddPitchForm()
     
     if form.validate_on_submit():
         category = form.my_category.data
@@ -29,6 +29,6 @@ def home():
 
     all_pitches = Pitch.get_pitches()
 
-    title = ''    
-    return render_template('home.html', title = title, pitch_form = form, pitches = all_pitches)
+    title = 'cause'    
+    return render_template('pitches.html', title = title, pitch_form = form, pitches = all_pitches)
 
