@@ -10,7 +10,20 @@ from flask_login import login_required, current_user
 @main.route('/')
 def index():
   title="Kweriiii"
-  return render_template('index.html',title=title)
+  form = AddPitchForm()
+    
+  if form.validate_on_submit():
+        category = form.my_category.data
+
+        pitch = form.pitch.data
+
+        new_pitch = Pitch(pitch_content=pitch, pitch_category = category, user = current_user)
+        new_pitch.save_pitch()
+
+        return redirect(url_for('main.home'))
+
+  all_pitches = Pitch.get_pitches()
+  return render_template('index.html',title=title, pitch_form = form, pitches = all_pitches)
 
 @main.route('/home', methods = ['GET', 'POST'])
 @login_required

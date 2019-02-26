@@ -1,4 +1,11 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
+{% import "bootstrap/wtf.html" as wtf %}
 
-<h4>{{pitch.content}}</h4>
+{% block content %}
+{{wtf.quick_form(pitch_form)}}
+
+{{ macro.displayPitches(pitches)}}
+
+
+{% endblock %}

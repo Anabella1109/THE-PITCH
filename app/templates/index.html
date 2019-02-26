@@ -1,5 +1,6 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
+{% import "bootstrap/wtf.html" as wtf %}
 
 <!-- Styles block -->
 
@@ -15,5 +16,11 @@
         {% endif %}
       
     {%block content %}
-    <h2>Loremmmmu ipsuuuum koko bk,fwhfyeri  mkoefm bnuiefe mnirut ,rfeorui</h2>
-    {%endblock%}
+    
+   {{wtf.quick_form(pitch_form)}}
+
+   {{ macro.displayPitches(pitches)}}
+
+
+{% endblock %}
+   
