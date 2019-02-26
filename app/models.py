@@ -1,12 +1,12 @@
-# from . import db
-# from werkzeug.security import generate_password_hash,check_password_hash
-# from flask_sqlalchemy import SQLAlchemy
-# from flask_login import UserMixin
-# from . import login_manager
-# from datetime import datetime
+from . import db
+from werkzeug.security import generate_password_hash,check_password_hash
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from . import login_manager
+from datetime import datetime
 
-class User(UserMixin,db.model):
-    __tablename__:'users'
+class User(UserMixin,db.Model):
+    __tablename__='users'
 
     id = db.Column(db.Integer,primary_key=True)
     username= db.Column(db.String(255),index = True)
@@ -14,8 +14,9 @@ class User(UserMixin,db.model):
     bio= db.Column(db.String(255))
     profile_pic_path = db.Column(db.String(255))
     pass_secure=db.column(db.String(255))
-    pitches= db.Relationship('Pitch',backref='pitch', lazy='dynamic')
-    comments = db.Relationship('Comment',backref='comment' ,lazy='dynamic')
+    pitches= db.relationship('Pitch',backref='pitch', lazy='dynamic')
+    comments = db.relationship('Comment',backref='comment' ,lazy='dynamic')
+
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
@@ -39,10 +40,10 @@ def load_user(user_id):
 class Pitch(db.Model):
    __tablename__ = 'pitches'
 
-   id = db.Column(db.integer,primary_key = True)
+   id = db.Column(db.Integer,primary_key = True)
    user_id= db.Column(db.Integer,db.ForeignKey('users.id'))
    content = db.Column(db.String(255))
-   comments = db.Relationship('Comment',backref='comment' ,lazy='dynamic')
+   comments = db.relationship('Comment',backref='comment' ,lazy='dynamic')
    category = db.Column(db.String(255))
 
 
@@ -59,7 +60,7 @@ class Pitch(db.Model):
         pitches = Pitch.query.filter_by(user_id=id).all()
         return pitches
 
-class Comment(db.model):
+class Comment(db.Model):
     __tablename__= 'comments'
     
     id= db.Column(db.Integer,primary_key= True)
