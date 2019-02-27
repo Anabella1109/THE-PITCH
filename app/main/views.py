@@ -8,14 +8,14 @@ from flask_login import login_required, current_user
 # import markdown2 
 from flask_fontawesome import FontAwesome
 
-@main.route('/', methods = ['GET', 'POST'])
+@main.route('/')
 def index():
   title="Kweriiii"
   all_pitches = Pitch.get_pitches()
   
   return render_template('index.html',title=title, pitches = all_pitches)
 
-@main.route('/home', methods = ['GET', 'POST'])
+@main.route('/pitch/new', methods = ['GET', 'POST'])
 @login_required
 def home():
     form = AddPitchForm()
