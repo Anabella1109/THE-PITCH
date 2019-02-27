@@ -3,20 +3,42 @@
 
 {% for pitch in pitches %}
    {% if pitch.user.profile_pic_path %}
-    <img src="{{ pitch.user.profile_pic_path }}" alt="Display image" height='50'>
+    <img src="{{ pitch.user.profile_pic_path }}" alt="Display image" height='50' width='50'>
     <p>{{pitch.user.username}}</p>
 
-  <h4>{{pitch.content}}</h4>
-  <button>Upvote</button>
+  <a href="/pitch/{{pitch.id}}">{{pitch.content}}</a>
+  <button href="{{url_for('main.upvoting',id=pitch.id)}}">Upvote</button>
   <button>Downvote</button>
+  
+   <a href="/new/comment/{{pitch.id}}">Add comment</a>
   {%else %}
    <img src="static/photos/no_dp.png" alt="">
    <p>{{pitch.user.username}}</p>
-   <h4>{{pitch.content}}</h4>
+   <a href="/pitch/{{pitch.id}}">{{pitch.content}}</a>
+
   <button>Upvote</button>
   <button>Downvote</button>
-  <a href="/new/commemt/{{pitch.id}}">Add comment</a>
+  <a href="/new/comment/{{pitch.id}}">Add comment</a>
   {%endif%}
 
   {%endfor%}
   {%endmacro%}
+
+{% macro displayComments(comments) %}
+{% for comment in comments %}
+{% if comment.user.profile_pic_path %}
+<img src="{{ comment.user.profile_pic_path }}" alt="Display image" height='50' width='50'>
+<p>{{comment.user.username}}</p>
+  <p>{{comment.content}}</p>
+  {%else%}
+  <img src="static/photos/no_dp.png" alt="Display image" height='50' width='50'>
+  <p>{{comment.user.username}}</p>
+  
+    <p>{{comment.content}}</p>
+
+
+{%endif%}
+{%endfor%}
+{%endmacro%}
+
+
