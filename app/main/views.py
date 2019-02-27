@@ -17,7 +17,7 @@ def index():
 
 @main.route('/pitch/new', methods = ['GET', 'POST'])
 @login_required
-def home():
+def add_pitch():
     form = AddPitchForm()
     
     if form.validate_on_submit():
@@ -28,7 +28,7 @@ def home():
         new_pitch = Pitch(content=pitch, category = category, user=current_user)
         new_pitch.save_pitch()
 
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.index'))
 
     all_pitches = Pitch.get_pitches()
 
@@ -73,4 +73,26 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/new/commemt/<int:id>', methods = ['GET','POST'])
+@login_required
+def add_comment(id):
+  pitch=Pitch.query.filter_by(id=id).first()
+  if pitch is None:
+    abort(404)
+
+  form=CommentForm()
+  if form.validate_on_submit():
+     comment=form.comment.data
+     new_comment=Comment(content=comment ,pitch=pitch ,user=current_user)
+     db.session.add(new_comment)  
+     db.session.commit() 
+
+     return redirect(url_for('main.index'))
+  return render_template('comment.html', comment_form=form)
+
+@main.route('/pitch/<int:id>')
+def single_pitch(id):
+   pitch=Pitch.query.filter_by(id=id)
+
 

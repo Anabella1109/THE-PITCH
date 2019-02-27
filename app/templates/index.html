@@ -13,7 +13,7 @@
         {% if title %}
         <title> {{ title }}</title>
         {% else %}
-        <title> Welcome to the best Movie Review website </title>
+        <title> Welcome to 60 seconds pitch</title>
         {% endif %}
       
     {%block content %}
@@ -22,6 +22,7 @@
 
    {{ macro.displayPitches(pitches)}}
    <a href="/pitch/new">Add Pitch</a>
+
 
 
 {% endblock %}

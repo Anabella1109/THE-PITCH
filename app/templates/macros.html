@@ -1,9 +1,9 @@
-{{ fontawesome_html() }}
+<!-- {{ fontawesome_html() }} -->
 {% macro displayPitches(pitches) %}
 
 {% for pitch in pitches %}
    {% if pitch.user.profile_pic_path %}
-    <img src="{{pitch.user.profile_pic_path}}" alt="Display image" height='50'>
+    <img src="{{ pitch.user.profile_pic_path }}" alt="Display image" height='50'>
     <p>{{pitch.user.username}}</p>
 
   <h4>{{pitch.content}}</h4>
@@ -15,6 +15,7 @@
    <h4>{{pitch.content}}</h4>
   <button>Upvote</button>
   <button>Downvote</button>
+  <a href="/new/commemt/{{pitch.id}}">Add comment</a>
   {%endif%}
 
   {%endfor%}
