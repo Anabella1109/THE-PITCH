@@ -8,7 +8,7 @@
     <p class="username">{{pitch.user.username}}</p>
 
   <a href="/pitch/{{pitch.id}}" class='pitch'>{{pitch.content}}</a><br>
-  <button href="{{url_for('main.upvoting',id=pitch.id)}}">Upvote</button>
+  <button href="">Upvote</button>
   <button>Downvote</button>
   
    <a href="/new/comment/{{pitch.id}}" class="btn btn-primary">Add comment</a>
@@ -31,12 +31,13 @@
 {% macro displayComments(comments) %}
 {% for comment in comments %}
 {% if comment.user.profile_pic_path %}
+<br>
 <img src="{{ comment.user.profile_pic_path }}" alt="Display image" height='50' width='50'>
-<p>{{comment.user.username}}</p>
+<h3>{{comment.user.username}}</h3>
   <p>{{comment.content}}</p>
   {%else%}
   <img src="static/photos/no_dp.png" alt="Display image" height='50' width='50'>
-  <p>{{comment.user.username}}</p>
+  <h3>{{comment.user.username}}</h3>
   
     <p>{{comment.content}}</p>
 

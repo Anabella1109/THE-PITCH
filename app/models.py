@@ -68,17 +68,17 @@ class Pitch(db.Model):
        return pitches
 
    @classmethod
-   def upvote(cls,id):
-       pitch=Pitch.query.filter_by(pitch_id=id).all()
-       cls.upvotes=0
-       cls.upvotes=pitch.upvotes+1
+   def upvotess(cls,id):
+       pitch=Pitch.query.filter_by(id=id).first()
+       pitch.upvotes=0
+       upvotes=pitch.upvotes+1
        return upvotes
 
    @classmethod
-   def downvote(cls,id):
-       pitch=Pitch.query.filter_by(pitch_id=id).all()
-       cls.downvotes=0
-       cls.downvotes=pitch.downvotes-1
+   def downvotess(cls,id):
+       pitch=Pitch.query.filter_by(id=id).first()
+       pitch.downvotes=0
+       downvotes=pitch.downvotes-1
        return downvotes
 
 

@@ -25,7 +25,7 @@ def add_pitch():
 
         pitch = form.content.data
 
-        new_pitch = Pitch(content=pitch, category = category, user=current_user)
+        new_pitch = Pitch(content=pitch, category = category,upvotes=0,downvotes=0 ,user=current_user)
         new_pitch.save_pitch()
 
         return redirect(url_for('main.index'))
@@ -97,11 +97,11 @@ def single_pitch(id):
     comments=Comment.get_comments(id=id)
     return render_template('pitch.html',pitch=pitch,comments=comments)
 
-@main.route('/downvotes/<int:id>')
+@main.route('/upvotes/<int:id>')
 def upvoting(id):
     pitch1=Pitch.query.filter_by(id=id).first()
-    pitch1.upvotes=Pitch.upvote(id)
-    return redirect(url_for('main.single_pitch',pitch=pitch1.upvotes))
+    pitch1.upvotes=Pitch.upvote(pitch1.id)
+    return redirect(url_for('main.single_pitch',id=pitch1.id))
 
 @main.route('/categories')
 def categories():
@@ -123,7 +123,7 @@ def interview():
         
 @main.route('/category/promotion')
 def promotion():
-    title="60 seconds|Interview"
+    title="60 seconds|Promotion"
     pitches=Pitch.query.filter_by(category='promotion-pitches').all()
     return render_template('promotion.html',pitches=pitches)
     
