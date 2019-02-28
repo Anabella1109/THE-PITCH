@@ -69,7 +69,7 @@ def update_pic(uname):
     user = User.query.filter_by(username = uname).first()
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
-        path = f'static/photos/{filename}'
+        path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
@@ -105,16 +105,27 @@ def upvoting(id):
 
 @main.route('/categories')
 def categories():
-    all_pitches = Pitch.get_pitches()
-    cats=[]
-    for pitch in all_pitches:
-        category=pitch.category
-        cats.append(category)
-        return cats
+    title="Categories"
 
-    return render_template('categories.html',category = cats)
+    return render_template('categories.html')
+
+@main.route('/category/pickup')
+def pickup():
+    title="60 seconds|Pickup"
+    pitches=Pitch.query.filter_by(category='pickup-lines').all()
+    return render_template('pickup.html',pitches=pitches)
+
+@main.route('/category/interview')
+def interview():
+    title="60 seconds|Interview"
+    pitches=Pitch.query.filter_by(category='Interview-pitches').all()
+    return render_template('interview.html',pitches=pitches)
         
-    
+@main.route('/category/promotion')
+def promotion():
+    title="60 seconds|Interview"
+    pitches=Pitch.query.filter_by(category='promotion-pitches').all()
+    return render_template('promotion.html',pitches=pitches)
     
 
     
